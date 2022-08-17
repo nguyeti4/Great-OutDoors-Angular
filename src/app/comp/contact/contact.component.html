@@ -1,0 +1,100 @@
+<div class="col-md-12" >
+    <div class="card card-container">
+      <form
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <h1>Contact Us</h1><br>
+        <div class="form-group">
+          <label for="firstName">First name</label><br>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            [(ngModel)]="form.firstName"
+            required
+            #firstName="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }"
+          />
+          <div *ngIf="firstName.errors && f.submitted" class="invalid-feedback">
+            <div *ngIf="firstName.errors['required']">First Name is required</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last name</label><br>
+            <input
+              type="text"
+              class="form-control"
+              name="lastName"
+              [(ngModel)]="form.lastName"
+              required
+              #lastName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }"
+            />
+            <div *ngIf="lastName.errors && f.submitted" class="invalid-feedback">
+              <div *ngIf="lastName.errors['required']">Last Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label><br>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              [(ngModel)]="form.email"
+              required
+              email
+              #email="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+              <div *ngIf="email.errors['required']">Email is required</div>
+              <div *ngIf="email.errors['email']">
+                Email must be a valid email address
+              </div>
+              </div>
+        </div>
+
+        <div class="form-group">
+          <label for="query">Message</label><br>
+          <textarea
+           id="query" 
+           name="query" 
+           rows="4" 
+           cols="50"
+           class="form-control"
+           name="query"
+           [(ngModel)]="form.query"
+           required
+           #query="ngModel"
+           [ngClass]="{ 'is-invalid': f.submitted && query.errors }"
+           ></textarea> <br>
+         <!--<input
+            type="text"
+            class="form-control"
+            name="query"
+            [(ngModel)]="form.query"
+            required
+            #query="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && query.errors }"
+          />-->
+          <div *ngIf="query.errors && f.submitted" class="invalid-feedback">
+            <div *ngIf="query.errors['required']">Content is required</div>
+          </div>
+      </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Send Message
+          </button>
+        </div>
+      </form>
+
+    </div>
+</div>
+  
+<div>{{ message }}</div>

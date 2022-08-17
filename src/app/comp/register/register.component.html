@@ -1,0 +1,227 @@
+<!--We use Form Validation in the template:
+•	email: required, email format
+•	password: required, minLength=6
+•	firstName: required, minLength=3
+•	lastName: required, minLength=3
+•	phone: required, exactLength=10
+•	addr1: required, minLength=6
+•	addr2: minLength=6
+•	state: required, minLength=6
+•	pin: required, exactLength=5
+
+ -->
+
+ <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          email
+          #email="ngModel"
+          [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+        />
+        <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors['required']">Email is required</div>
+          <div *ngIf="email.errors['email']">
+            Email must be a valid email address
+          </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+          />
+          <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+            <div *ngIf="password.errors['required']">Password is required</div>
+            <div *ngIf="password.errors['minlength']">
+              Password must be at least 6 characters
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="firstName"
+              [(ngModel)]="form.firstName"
+              required
+              minlength="3"
+              #firstName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="firstName.errors && f.submitted">
+              <div *ngIf="firstName.errors['required']">First Name is required</div>
+              <div *ngIf="firstName.errors['minlength']">
+                First Name name must be at least 3 characters
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="lastName"
+              [(ngModel)]="form.lastName"
+              required
+              minlength="3"
+              #lastName="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="lastName.errors && f.submitted">
+              <div *ngIf="lastName.errors['required']">Last Name is required</div>
+              <div *ngIf="lastName.errors['minlength']">
+                Last name must be at least 3 characters
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input
+              type="text"
+              class="form-control"
+              name="phone"
+              [(ngModel)]="form.phone"
+              required
+              minlength="10"
+              maxlength="10"
+              #phone="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && phone.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="phone.errors && f.submitted">
+              <div *ngIf="phone.errors['required']">Phone is required</div>
+              <div *ngIf="phone.errors['minlength']">
+                Enter only a 10 digit phone number
+              </div>
+              <div *ngIf="phone.errors['maxlength']">
+                Enter only a 10 digit phone number
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="addr1">Address Line 1</label>
+            <input
+              type="text"
+              class="form-control"
+              name="addr1"
+              [(ngModel)]="form.addr1"
+              required
+              minlength="6"
+              #addr1="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && addr1.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="addr1.errors && f.submitted">
+              <div *ngIf="addr1.errors['required']">Primary address is required</div>
+              <div *ngIf="addr1.errors['minlength']">
+                Address needs to be at least 6 characters
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="addr2">Address Line 2</label>
+            <input
+              type="text"
+              class="form-control"
+              name="addr2"
+              [(ngModel)]="form.addr2"
+              minlength="6"
+              #addr2="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && addr2.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="addr2.errors && f.submitted">
+              <div *ngIf="addr2.errors['minlength']">
+                Address needs to be at least 6 characters
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="state">State</label>
+            <input
+              type="text"
+              class="form-control"
+              name="state"
+              [(ngModel)]="form.state"
+              required
+              minlength="6"
+              #state="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && state.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="state.errors && f.submitted">
+              <div *ngIf="state.errors['required']">State is required</div>
+              <div *ngIf="state.errors['minlength']">
+                STate must be at least 6 characters
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="pin">Pincode</label>
+            <input
+              type="text"
+              class="form-control"
+              name="pin"
+              [(ngModel)]="form.pin"
+              required
+              minlength="5"
+              maxlength="5"
+              #pin="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && pin.errors }"
+            />
+            <div class="invalid-feedback" *ngIf="pin.errors && f.submitted">
+              <div *ngIf="pin.errors['required']">Pin is required</div>
+              <div *ngIf="pin.errors['minlength']">
+                Enter only a 5 digit pin
+              </div>
+              <div *ngIf="phone.errors['maxlength']">
+                Enter only a 5 digit pin
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">Sign Up</button>
+        </div>
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+      </form>
+      
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+      </div>
+    </div>
+  </div>
+  

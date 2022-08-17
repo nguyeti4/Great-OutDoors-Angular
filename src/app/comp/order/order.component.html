@@ -1,0 +1,104 @@
+<div>
+    <div class="product-box">
+        <h1>{{ product.name }}</h1>
+        <img src="{{ product.imageUrl }}" class="img-responsive">
+        <div class="price">{{ product.price | currency:'USD' }}</div>
+        <div class="description">{{ product.description }}</div> 
+        <label for="quantity">Quantity: </label>
+        <input type="text" id="quantity" name="quantity" value="{{ quantity }}" size="1"/>
+    </div>
+    <br>
+    <div class="white-text">
+    <h2 class="white-text">Price Detail</h2><br>
+    <label for="price" class="white-text">Price ( {{ quantity }} item): </label>
+    <i> {{ product.price * quantity}}</i><br>
+    <label for="charges">Delivery Charges: </label>
+    <i> + $10</i><br>
+    <b><label for="total">Total: </label>
+    <i> {{ product.price * quantity + 10}}</i></b><br>
+    </div>
+</div>
+
+<div class="addresses-box">
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+                <button class="btn btn-primary" (click)="AddAddress()">Add another address</button>                
+                <br>
+                <br>
+                <form
+                name="form"
+                #f="ngForm"
+                nonvalidate
+                >
+                    <h3 class="white-text">Address Detail</h3> 
+                    <div *ngFor="let tempAddress of addresses" class="form-group col-md-3">
+                        <label for="addr1">Address Line1 </label><br/>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="addr1"
+                            [(ngModel)]="tempAddress.addressLine1"
+                            required
+                            #addr1="ngModel"
+                            [ngClass]="{ 'is-invalid': f.submitted && addr1.errors }"
+                            /><br/>
+                            <div class="invalid-feedback" *ngIf="addr1.errors && f.submitted">
+                                <div *ngIf="addr1.errors['required']">Address 1 is required</div>
+                            </div>
+
+                        <label for="addr2">Address Line2 </label><br/>
+
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="addr2"
+                        [(ngModel)]="tempAddress.addressLine2"
+                        #addr2="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && addr2.errors }"
+                        /><br/>
+                            <div class="invalid-feedback" *ngIf="addr2.errors && f.submitted">
+                                <div *ngIf="addr2.errors['required']">Email is required</div>
+                            </div>  
+
+                        <label for="state">State </label><br/>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="state"
+                        [(ngModel)]="tempAddress.state"
+                        required
+                        #state="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && state.errors }"
+                        /><br/>
+                            <div class="invalid-feedback" *ngIf="state.errors && f.submitted">
+                                <div *ngIf="state.errors['required']">State is required</div>
+                            </div>        
+                        
+                        <label for="pincode">Pincode </label><br/>
+                        <input 
+                        type="text" 
+                        class="form-control" 
+                        name="pincode"
+                        [(ngModel)]="tempAddress.pincode"
+                        required
+                        #pincode="ngModel"
+                        [ngClass]="{ 'is-invalid': f.submitted && pincode.errors }"
+                        /><br/>
+                            <div class="invalid-feedback" *ngIf="pincode.errors && f.submitted">
+                                <div *ngIf="pincode.errors['required']">Pin is required</div>
+                            </div>           
+                    </div>
+                    <button class="btn btn-primary btn-block" (click)="PlaceOrder()">
+                    Pay
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>{{message}}</div>
+</div>
+
+
+

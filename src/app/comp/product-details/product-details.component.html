@@ -1,0 +1,13 @@
+<div class="product-box">
+    <h1>{{ product.name }}</h1>
+    <img src="{{ product.imageUrl }}" class="img-responsive">
+    <div class="price">{{ product.price | currency:'USD' }}</div>
+    <div class="description">{{ product.description }}</div> 
+    <label for="quantity">Quantity: </label>
+    <input type="text" id="quantity" name="quantity" value=1 size="1"/><br><br>
+    <!--<a routerLink="/buy/{{ product.id }}/{{ product.quantity}}/{{ user.id }}" class="primary-btn"><button>Buy now</button></a>-->
+    <button class="btn btn-primary" (click)="BuyProduct()">Buy now</button>
+    <button class="btn btn-primary" (click)="AddProduct()">Add to cart</button>
+
+    <div>{{ message }}</div>
+</div>

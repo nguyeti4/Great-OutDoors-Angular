@@ -1,0 +1,46 @@
+    <div class="main-content" *ngIf="currentUser; else loggedOut">
+        <div *ngIf="hasProducts; else noProducts">
+            <div class="section-content section-content-p30">
+                <div class="container-fluid">
+                    <div class="row">
+        
+                        <!-- loop over the collection of products 
+                        <div *ngFor="let tempProduct of products" class="col-md-3">
+                            <div class="product-box">
+                                <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
+                                <h1>{{ tempProduct.name }}</h1>
+                                <p>{{ tempProduct.price }}</p><br>
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" id="quantity" name="quantity" value="{{ tempProduct.quantity }}"/>
+                                <button class="btn btn-primary btn-block" (click)="viewConfirm(tempProduct.id)">Remove</button>
+                                <a routerLink="/buy/{{ tempProduct.id }}/{{ tempProduct.quantity}}/{{ currentUser.id }}"><button class="btn btn-primary btn-block">Place order</button></a>
+                            </div>       
+                        </div> -->
+
+                        <!-- loop over the collection of products -->
+                        <div *ngFor="let tempCartItem of carts" class="col-md-3">
+                            <div class="product-box">
+                                <img src="{{ tempCartItem.product.imageUrl }}" class="img-responsive">
+                                <h1>{{ tempCartItem.product.name }}</h1>
+                                <p>{{ tempCartItem.product.price | currency:'USD'}}</p><br>
+                                <label for="quantity">Quantity:</label>
+                                <input type="text" id="quantity" name="quantity" value="{{ tempCartItem.quantity }}" size="1"/>
+                                <button class="btn btn-primary btn-block" (click)="viewConfirm(tempCartItem.cartId)">Remove</button>
+                                <a routerLink="/buy/{{ tempCartItem.product.id }}/{{ tempCartItem.quantity}}/{{ currentUser.id }}"><button class="btn btn-primary btn-block">Place order</button></a>
+                            </div>       
+                        </div> 
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div> 
+
+ <ng-template #noProducts>
+    <h1 class>No Item</h1><br>
+    <a routerLink="/home">Continue shopping</a>
+  </ng-template>
+
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
