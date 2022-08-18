@@ -24,9 +24,12 @@
                                 <h1>{{ tempCartItem.product.name }}</h1>
                                 <p>{{ tempCartItem.product.price | currency:'USD'}}</p><br>
                                 <label for="quantity">Quantity:</label>
-                                <input type="text" id="quantity" name="quantity" value="{{ tempCartItem.quantity }}" size="1"/>
+                                <input type="text" id="quantity{{ tempCartItem.cartId }}" name="quantity" value="{{ tempCartItem.quantity }}" size="1"/>
+                              <!--  <input type="text" id="quantity" name="quantity" value="{{ tempCartItem.quantity }}" size="1"/> -->
                                 <button class="btn btn-primary btn-block" (click)="viewConfirm(tempCartItem.cartId)">Remove</button>
-                                <a routerLink="/buy/{{ tempCartItem.product.id }}/{{ tempCartItem.quantity}}/{{ currentUser.id }}"><button class="btn btn-primary btn-block">Place order</button></a>
+                                <button class="btn btn-primary btn-block" (click)="Buy(tempCartItem.cartId,tempCartItem.quantity,tempCartItem.product.id)">Place Order</button>
+                              <!--  <a routerLink="/buy/{{ tempCartItem.product.id }}/{{ tempCartItem.quantity}}/{{ currentUser.id }}"><button class="btn btn-primary btn-block">Place order</button></a>-->
+
                             </div>       
                         </div> 
                         <p>{{ message }}</p>

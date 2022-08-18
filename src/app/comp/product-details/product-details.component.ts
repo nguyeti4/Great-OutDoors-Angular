@@ -61,7 +61,9 @@ export class ProductDetailsComponent implements OnInit {
     else{
       let quantity = <HTMLInputElement> document.getElementById("quantity");
       console.log("quantity: ",quantity.value);
-      this.router.navigate([`/buy/${this.product.id}/${ quantity.value }/${ this.user.id }`]);
+    //  this.router.navigate([`/buy/${this.product.id}/${ quantity.value }/${ this.user.id }`]);
+      this.router.navigate([`/buy/${this.product.id}/${ quantity.value }/0/0`]);
+
     }
   }
 /*

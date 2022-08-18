@@ -20,11 +20,11 @@ export class UserService {
   });
   
   constructor(private http: HttpClient) { }
-
-  getUserCart(userId: number): Observable<any>{
-    const url = `${this.baseUrl}/users/${userId}/cart`;
+/*
+  getUserCart(userId: number, productId:number): Observable<any>{
+    const url = `${this.baseUrl}/test/getCart/${userId}/${productId}`;
     return this.http.get<Cart>(url);
-  }
+  }*/
 
   //use
   getUserCartItems(userId: number):Observable<any>{
@@ -74,6 +74,14 @@ export class UserService {
       },
       httpOptions
     );
+  }
+
+  
+  changeQuantity(cartId:number,quantity:number){
+    console.log("cartIdnew", cartId);
+    console.log("qnew", quantity);
+    const url = `${this.baseUrl}/test/changeQuantity/${cartId}/${quantity}`;
+    return this.http.post(url,{ responseType: 'text' });
   }
 
   sendQuery(firstName: string,lastName: string,email: string,query: string){

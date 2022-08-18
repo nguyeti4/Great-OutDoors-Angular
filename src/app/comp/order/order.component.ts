@@ -17,16 +17,30 @@ export class OrderComponent implements OnInit {
   userId: number;
   message: string;
   addresses: Address[];
+  cartId: number
 
   constructor(private pserv:ProductService, private route:ActivatedRoute, private userService: UserService, private userStorage: StorageService) { }
   
 
   ngOnInit(): void {
        //whenever there is a change in the parameter route
-       this.route.paramMap.subscribe(()=>{
+        this.route.paramMap.subscribe(()=>{
+        this.cartId =+ this.route.snapshot.paramMap.get("cartId")
         var productId =+ this.route.snapshot.paramMap.get("productId");
         this.quantity =+ this.route.snapshot.paramMap.get("quantity");
-        this.userId =+ this.route.snapshot.paramMap.get("userId");
+        let quantity_changed =+ this.route.snapshot.paramMap.get("changed");
+        this.userId =+ this.userStorage.getUser().id;
+        console.log("userId: ",this.userId);
+        //this.userId =+ this.route.snapshot.paramMap.get("userId");
+        if(quantity_changed){
+          console.log("I changed!");
+          console.log("quant: ",this.quantity);
+          this.userService.changeQuantity(this.cartId,this.quantity).subscribe(
+            data=>{
+              console.log(data);
+            }
+          );
+        }
         if(productId==0){
           productId=1;
         }
@@ -60,6 +74,13 @@ export class OrderComponent implements OnInit {
         data=>{
           this.message = data.message;
           console.log(this.message);
+          if(this.cartId){
+            this.userService.removeProduct(this.cartId,this.userId).subscribe(
+              data=>{
+                console.log("rmv message: ",data.message);
+              }
+            );
+          }
         }
       );
     }

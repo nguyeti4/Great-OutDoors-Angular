@@ -18,9 +18,11 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'category/:category', component:ProductListComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'buy/:productId/:quantity/:userId', component:OrderComponent},
+  //{path: 'buy/:productId/:quantity/:userId/:cartId', component:OrderComponent},
+  {path: 'buy/:productId/:quantity/:cartId/:changed', component:OrderComponent},
   {path: 'product/:id', component:ProductDetailsComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
+  //{path: 'buy/:productId/:quantity/:userId/:cartId', component:OrderComponent}
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Cart } from 'src/app/model/cart';
 import { CartItem } from 'src/app/model/cart-item';
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
   message = null;
   hasProducts = null;
   carts:CartItem[] = null;
-  constructor(private storageService: StorageService, private userService: UserService) { }
+  constructor(private storageService: StorageService, private userService: UserService, private router:Router) { }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
@@ -96,6 +97,19 @@ export class CartComponent implements OnInit {
       }
     );
     window.location.reload();
+  }
+
+  
+  Buy(cartId: number, itemQuantity: number, productId:number){
+      let quantity_changed = 0;
+      let quantity = <HTMLInputElement> document.getElementById(`quantity${cartId}`);
+      console.log("New quantity: ",parseInt(quantity.value));
+      console.log("Old quantity: ",itemQuantity);
+      if(itemQuantity != parseInt(quantity.value)){
+         quantity_changed = 1;
+      }
+      console.log("cartId: "+cartId);
+      this.router.navigate([`/buy/${productId}/${ quantity.value }/${ cartId }/${ quantity_changed }`]);
   }
 
 }
